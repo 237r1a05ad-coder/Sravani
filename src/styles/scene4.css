@@ -1,0 +1,261 @@
+/* =======================================================
+   SCENE 4 — CLOSING PAGE
+   Warm, peaceful, hopeful, and memorable final screen.
+   ======================================================= */
+
+.scene-finale {
+  width: 100%;
+  max-width: 680px;
+  min-height: 80vh;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1.2s var(--ease-cinematic), transform 1.2s var(--ease-cinematic);
+}
+
+.scene-finale.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scene-finale.exiting {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Radiant Ambient Golden Celebration Halo */
+.finale-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(240, 185, 110, 0.22) 0%,
+    rgba(217, 163, 104, 0.09) 45%,
+    rgba(18, 16, 24, 0.01) 70%,
+    transparent 80%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.finale-ambient-glow.climax-glow {
+  background: radial-gradient(
+    circle,
+    rgba(245, 195, 120, 0.28) 0%,
+    rgba(225, 160, 90, 0.12) 45%,
+    transparent 80%
+  );
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* Main Narrative Container */
+.finale-narrative-container {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Final Signature Stage */
+.final-signature-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 580px;
+  width: 100%;
+}
+
+/* Keepsake Clean Card */
+.final-clean-card {
+  width: 100%;
+  padding: clamp(1.8rem, 1.4rem + 1.8vw, 2.8rem) clamp(1.2rem, 1rem + 1.4vw, 2.2rem);
+  border-radius: 20px;
+  background: rgba(18, 19, 28, 0.75);
+  border: 1px solid rgba(217, 163, 104, 0.26);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 35px rgba(217, 163, 104, 0.09);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.final-clean-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.final-card-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.8rem + 1.8vw, 3.2rem);
+  color: var(--text-pure);
+  margin: 0 0 0.6rem 0;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+.final-card-sentiment {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.25rem);
+  font-style: italic;
+  color: var(--text-warm);
+  line-height: 1.6;
+  margin: 0 0 1.2rem 0;
+  max-width: 440px;
+}
+
+.final-author-signature {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+  color: var(--gold-light);
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+/* Closing Sentiments */
+.final-closing-lines-block {
+  margin-top: clamp(1.5rem, 1.2rem + 1.2vw, 2.2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.final-closing-line {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1rem + 0.4vw, 1.4rem);
+  font-style: italic;
+  color: var(--text-warm);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.final-closing-line.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Climax Banner */
+.final-climax-banner {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.8rem + 2vw, 3.4rem);
+  color: var(--text-pure);
+  margin: 1.2rem 0 0 0;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 1.3s var(--ease-cinematic), transform 1.3s var(--ease-cinematic);
+  text-shadow: 0 4px 30px rgba(217, 163, 104, 0.35);
+}
+
+.final-climax-banner.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.final-climax-banner .heart {
+  color: var(--gold-primary);
+  display: inline-block;
+  animation: gentleHeartbeat 3s ease-in-out infinite;
+}
+
+@keyframes gentleHeartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+/* Replay Story CTA */
+.replay-container {
+  margin-top: clamp(1.8rem, 1.4rem + 1.5vw, 2.6rem);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.replay-container.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-replay-story {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(217, 163, 104, 0.28);
+  color: var(--text-warm);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.btn-replay-story:hover {
+  background: rgba(217, 163, 104, 0.14);
+  border-color: rgba(217, 163, 104, 0.5);
+  color: var(--text-pure);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(217, 163, 104, 0.15);
+}
+
+.btn-replay-story:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 3px;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 600px) {
+  .scene-finale {
+    padding: 1.2rem 0.8rem;
+    min-height: 85vh;
+  }
+
+  .final-clean-card {
+    padding: 1.6rem 1.1rem;
+    border-radius: 16px;
+  }
+
+  .final-card-heading {
+    font-size: clamp(1.8rem, 1.6rem + 1vw, 2.4rem);
+  }
+
+  .final-climax-banner {
+    font-size: clamp(1.7rem, 1.4rem + 1.2vw, 2.3rem);
+    line-height: 1.2;
+    margin-top: 1rem;
+  }
+
+  .final-closing-lines-block {
+    margin-top: 1.2rem;
+  }
+}

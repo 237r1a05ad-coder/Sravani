@@ -1,0 +1,127 @@
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Background Atmospheric Canvas */
+#ambient-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity 2s ease;
+}
+
+/* Tactile Micro-Grain Overlay */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Warmth Ambient Light Layer */
+.ambient-glow {
+  position: fixed;
+  inset: -20%;
+  width: 140%;
+  height: 140%;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(224, 168, 107, 0.04) 0%,
+    rgba(180, 130, 85, 0.015) 45%,
+    rgba(7, 7, 9, 0) 75%
+  );
+  opacity: 0.6;
+  transition: opacity 2.5s var(--ease-cinematic), transform 2.5s var(--ease-cinematic), background 2.5s var(--ease-cinematic);
+  transform: scale(0.95);
+}
+
+.ambient-glow.warmth-active {
+  opacity: 1;
+  transform: scale(1.08);
+  background: radial-gradient(
+    ellipse at 50% 48%,
+    rgba(235, 178, 115, 0.16) 0%,
+    rgba(215, 150, 90, 0.08) 38%,
+    rgba(140, 95, 60, 0.03) 65%,
+    rgba(7, 7, 9, 0) 80%
+  );
+}
+
+/* Main App Viewport */
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100dvh;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  padding-top: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-top));
+  padding-bottom: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-bottom));
+}
+
+@media (max-width: 640px) {
+  #app {
+    padding: max(0.6rem, env(safe-area-inset-top)) max(0.4rem, env(safe-area-inset-right)) max(0.6rem, env(safe-area-inset-bottom)) max(0.4rem, env(safe-area-inset-left));
+  }
+}
+
+.scene-container {
+  width: 100%;
+  max-width: 680px;
+  min-height: 380px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Screen Reader Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus Visible Polish for Accessibility */
+:focus-visible {
+  outline: 1.5px solid var(--accent-amber);
+  outline-offset: 4px;
+}
+

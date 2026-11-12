@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#08080a" />
+  <meta name="description" content="A quiet digital keepsake." />
+  <title>Oye</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='14' fill='%23d4af7a'/></svg>" />
+
+  <!-- Google Fonts: Editorial & Modern Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet" />
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="/src/styles/variables.css" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="stylesheet" href="/src/styles/scene1.css" />
+  <link rel="stylesheet" href="/src/styles/scene2.css" />
+  <link rel="stylesheet" href="/src/styles/scene3.css" />
+  <link rel="stylesheet" href="/src/styles/scene4.css" />
+</head>
+<body>
+  <!-- Ambient Atmospheric Canvas -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Tactile Grain Overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- Warmth Radial Light Layer -->
+  <div class="ambient-glow" id="ambient-glow" aria-hidden="true"></div>
+
+  <!-- Main Experience Wrapper -->
+  <main id="app" role="main">
+    <div id="scene-container" class="scene-container">
+      <!-- Active Scene will be mounted here dynamically -->
+    </div>
+  </main>
+
+  <!-- Screen Reader Announcements for Accessibility -->
+  <div id="sr-announcements" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Entry Script -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

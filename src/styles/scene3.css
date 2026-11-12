@@ -1,0 +1,554 @@
+/* =======================================================
+   SCENE 8 — THE LETTER
+   A deeply personal, handwritten-style letter experience preserved
+   inside the digital keepsake. Warm parchment, refined typography,
+   unhurried reading experience, and restrained emotion.
+   ======================================================= */
+
+.scene-letter {
+  width: 100%;
+  max-width: 840px;
+  max-height: 94dvh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  padding: clamp(0.6rem, 1.8vh, 1.4rem) 1.2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.6s var(--ease-cinematic), transform 1.6s var(--ease-cinematic);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 163, 104, 0.25) transparent;
+}
+
+.scene-letter::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scene-letter::-webkit-scrollbar-thumb {
+  background: rgba(217, 163, 104, 0.25);
+  border-radius: 999px;
+}
+
+.scene-letter.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scene-letter.exiting {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Ambient Radiant Warmth */
+.letter-ambient-glow {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(217, 163, 104, 0.15) 0%,
+    rgba(235, 185, 130, 0.06) 40%,
+    rgba(18, 16, 24, 0.01) 70%,
+    transparent 80%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+  transition: opacity 2s ease, transform 2s ease, background 2s ease;
+  z-index: 0;
+}
+
+.letter-ambient-glow.open-glow {
+  background: radial-gradient(
+    circle,
+    rgba(235, 190, 125, 0.22) 0%,
+    rgba(217, 163, 104, 0.09) 45%,
+    transparent 80%
+  );
+  transform: translateX(-50%) scale(1.15);
+}
+
+/* Container Frame */
+.letter-stage-container {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =======================================================
+   1. CLOSED ENVELOPE / DISCOVERY STATE
+   ======================================================= */
+
+.letter-closed-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 70vh;
+  width: 100%;
+  transition: opacity 0.8s var(--ease-cinematic), transform 0.8s var(--ease-cinematic);
+}
+
+.letter-closed-stage.hidden {
+  display: none;
+}
+
+.envelope-prologue {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: clamp(0.5rem, 1.2vh, 0.8rem);
+}
+
+.envelope-prologue span {
+  display: block;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: var(--text-warm);
+  letter-spacing: 0.04em;
+  margin-top: 0.3rem;
+}
+
+.envelope-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 2rem + 2.5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--text-pure);
+  text-shadow: 0 4px 25px rgba(255, 255, 255, 0.08);
+  margin-bottom: clamp(1rem, 2vh, 1.6rem);
+}
+
+/* The Envelope Keepsake Artwork */
+.envelope-art-wrapper {
+  position: relative;
+  width: 220px;
+  height: 150px;
+  margin: clamp(0.8rem, 2vh, 1.5rem) auto;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-soft);
+}
+
+.envelope-art-wrapper:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.envelope-art-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.5));
+}
+
+.envelope-seal-pulse {
+  animation: sealBreathing 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes sealBreathing {
+  0% {
+    filter: drop-shadow(0 0 4px rgba(217, 163, 104, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 14px rgba(217, 163, 104, 0.65));
+  }
+}
+
+.envelope-cue-text {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: clamp(0.8rem, 1.8vh, 1.2rem);
+}
+
+.btn-open-letter {
+  background: rgba(217, 163, 104, 0.14);
+  border: 1px solid rgba(217, 163, 104, 0.45);
+  color: var(--text-pure);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.8rem 2.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.45), 0 0 20px rgba(217, 163, 104, 0.2);
+  transition: all 0.35s var(--ease-soft);
+}
+
+.btn-open-letter:hover {
+  background: rgba(217, 163, 104, 0.25);
+  border-color: rgba(217, 163, 104, 0.75);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 28px rgba(217, 163, 104, 0.35);
+}
+
+.btn-open-letter:focus-visible {
+  outline: 2px solid var(--accent-amber);
+  outline-offset: 3px;
+}
+
+.btn-open-letter .seal-icon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent-amber);
+}
+
+/* =======================================================
+   2. OPEN LETTER / PARCHMENT READING SURFACE
+   ======================================================= */
+
+.letter-open-stage {
+  display: none;
+  width: 100%;
+  max-width: 760px;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1.2s var(--ease-cinematic), transform 1.2s var(--ease-cinematic);
+}
+
+.letter-open-stage.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parchment Card */
+.letter-parchment-sheet {
+  width: 100%;
+  background: rgba(18, 18, 26, 0.65);
+  border: 1px solid rgba(217, 163, 104, 0.22);
+  border-radius: 16px;
+  padding: clamp(1.4rem, 4vw, 3.2rem) clamp(1.2rem, 3.5vw, 2.8rem);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(217, 163, 104, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top Decorative Header */
+.letter-parchment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding-bottom: clamp(0.8rem, 1.8vh, 1.4rem);
+  margin-bottom: clamp(1.2rem, 2.5vh, 2rem);
+}
+
+.letter-mark-oye {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--accent-amber);
+  letter-spacing: 0.06em;
+}
+
+.letter-gang-six-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gang-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.gang-dot.dot-prudhvi {
+  background: #a4b8db;
+}
+
+.gang-dot.dot-oye {
+  background: var(--accent-amber);
+  box-shadow: 0 0 6px rgba(217, 163, 104, 0.6);
+  width: 6px;
+  height: 6px;
+}
+
+.letter-date-stamp {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Salutation */
+.letter-salutation {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.8rem + 1.8vw, 3.2rem);
+  font-weight: 400;
+  color: var(--text-pure);
+  margin-bottom: clamp(1rem, 2vh, 1.6rem);
+  letter-spacing: 0.02em;
+}
+
+/* Body Text & Paragraph Formatting */
+.letter-body-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vh, 1.4rem);
+  font-family: var(--font-serif);
+  font-size: clamp(1.02rem, 0.98rem + 0.25vw, 1.16rem);
+  line-height: 1.82;
+  color: var(--text-main);
+  text-align: left;
+}
+
+.letter-body-content p {
+  margin: 0;
+}
+
+/* Names Grid in Letter */
+.letter-gang-roster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+  padding: 0.6rem 0;
+  color: var(--text-pure);
+  font-size: 1.1rem;
+}
+
+.letter-gang-roster span {
+  position: relative;
+}
+
+.letter-gang-roster .gang-name-highlight {
+  color: var(--text-warm);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Highlighted Core Lines */
+.letter-core-highlight {
+  color: var(--text-warm);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.25rem);
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent-amber);
+  margin: 0.4rem 0;
+  line-height: 1.65;
+}
+
+/* The Telugu Messages Block in Letter */
+.letter-messages-callout {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(217, 163, 104, 0.2);
+  border-radius: 12px;
+  padding: clamp(0.9rem, 2vh, 1.4rem) clamp(1rem, 2vw, 1.6rem);
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.letter-message-line {
+  font-style: italic;
+  color: var(--text-pure);
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+}
+
+.letter-message-line.classic {
+  color: var(--text-warm);
+  margin-top: 0.2rem;
+}
+
+/* Letter Close & Sign-Off */
+.letter-sign-off-block {
+  margin-top: clamp(1.5rem, 3vh, 2.5rem);
+  padding-top: clamp(1.2rem, 2.5vh, 2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.letter-birthday-closing {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1.4rem + 1vw, 2.2rem);
+  color: var(--text-warm);
+  font-style: italic;
+  margin-bottom: 0.2rem;
+}
+
+.letter-signature {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.8rem);
+  color: var(--text-pure);
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+.letter-dedication {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+.letter-final-greeting {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--text-warm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+
+/* =======================================================
+   3. OUTRO TRANSITION SECTION — ONE LAST THING
+   ======================================================= */
+
+.letter-outro-section {
+  width: 100%;
+  max-width: 650px;
+  margin: clamp(2rem, 4vh, 3.5rem) auto clamp(1.5rem, 3vh, 2.5rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.7rem, 1.5vh, 1.1rem);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.letter-outro-section.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.outro-line {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  color: var(--text-main);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.outro-line.emphasis {
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--text-warm);
+}
+
+.outro-line.softer {
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+}
+
+.btn-scene4-transition,
+.btn-scene9-transition {
+  background: rgba(217, 163, 104, 0.14);
+  border: 1px solid rgba(217, 163, 104, 0.4);
+  color: var(--text-pure);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.8rem;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.4), 0 0 18px rgba(217, 163, 104, 0.18);
+  transition: all 0.35s var(--ease-soft);
+}
+
+.btn-scene4-transition:hover,
+.btn-scene9-transition:hover {
+  background: rgba(217, 163, 104, 0.25);
+  border-color: rgba(217, 163, 104, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 28px rgba(217, 163, 104, 0.35);
+}
+
+.btn-scene4-transition:focus-visible,
+.btn-scene9-transition:focus-visible {
+  outline: 2px solid var(--accent-amber);
+  outline-offset: 3px;
+}
+
+.btn-scene4-transition .arrow,
+.btn-scene9-transition .arrow {
+  transition: transform 0.3s ease;
+}
+
+.btn-scene4-transition:hover .arrow,
+.btn-scene9-transition:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* =======================================================
+   RESPONSIVENESS & MOBILE ERGONOMICS
+   ======================================================= */
+
+@media (max-width: 640px) {
+  .scene-letter {
+    padding: clamp(0.3rem, 1vh, 0.6rem) 0.35rem;
+    max-height: 96dvh;
+  }
+
+  .letter-parchment-sheet {
+    padding: 1.6rem 1rem;
+    border-radius: 12px;
+  }
+
+  .letter-body-content {
+    font-size: 1rem;
+    line-height: 1.75;
+    gap: 1.1rem;
+  }
+
+  .letter-core-highlight {
+    font-size: 1.05rem;
+    padding-left: 0.75rem;
+  }
+
+  .letter-messages-callout {
+    padding: 0.8rem 1rem;
+  }
+
+  .btn-open-letter,
+  .btn-scene4-transition,
+.btn-scene9-transition {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .envelope-art-wrapper {
+    width: 180px;
+    height: 125px;
+  }
+}
